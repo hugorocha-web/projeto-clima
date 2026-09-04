@@ -2,7 +2,7 @@ let btn = document.querySelector('button')
 async function pegarCord() {
     try{
         let infosCid = document.querySelector('input').value.toLowerCase().trim()
-        let apichamada = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${infosCid},BR&limit=5&appid=ef17f7ce5ce0b6fb1684d90f66417048`)
+        let apichamada = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${infosCid},BR&limit=5&appid=ef17f7ce5ce0b6fb1684d90f66417048`)
         console.log(apichamada)
         if(!apichamada.ok){
             throw new Error('NÃO ACHEI A CIDADE')
