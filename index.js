@@ -1,7 +1,7 @@
 let btn = document.querySelector('button')
 async function pegarCord() {
     try{
-        let infosCid = document.querySelector('input').value.toLocaleLowerCase().trim()
+        let infosCid = document.querySelector('input').value.toLowerCase().trim()
         let apichamada = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${infosCid},BR&limit=5&appid=ef17f7ce5ce0b6fb1684d90f66417048`)
         console.log(apichamada)
         if(!apichamada.ok){
@@ -17,19 +17,25 @@ async function pegarCord() {
         }
     }
     catch(error){
+        console.log('essa cidade não existe')
+        window.alert('essa cidade não existe')
         console.log(error)
+        return null
     }
 }
 btn.addEventListener('click', async () => {
 
     let coordenadas = await pegarCord()
+    if (!coordenadas) {
+        return
+    }
 
     let latitude = coordenadas.latitude
     let longitude = coordenadas.longitude
     console.log('aqui')
     
     try{
-        let apicidade = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=ef17f7ce5ce0b6fb1684d90f66417048&lang=pt_br`)
+        let apicidade = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=ef17f7ce5ce0b6fb1684d90f66417048&units=metric&lang=pt_br`)
         if(!apicidade.ok){
             throw new Error('não achamos a cidade ou não conseguimos resposta do servidor')
         }
@@ -39,7 +45,7 @@ btn.addEventListener('click', async () => {
         let cidade = document.querySelector('#cidade')
         cidade.style.display = 'block'
         cidade.textContent = dados.name
-        let graus = dados.main.temp -273.15
+        let graus = dados.main.temp
         console.log(graus)
         let situ = dados.weather[0].description
         let situacao = document.querySelector('#situação')
