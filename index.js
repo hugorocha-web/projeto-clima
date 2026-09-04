@@ -18,7 +18,6 @@ async function pegarCord() {
     }
     catch(error){
         console.log('essa cidade não existe')
-        window.alert('essa cidade não existe')
         console.log(error)
         return null
     }
