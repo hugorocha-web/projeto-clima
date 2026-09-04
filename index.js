@@ -1,7 +1,7 @@
 let btn = document.querySelector('button')
 async function pegarCord() {
     try{
-        let infosCid = document.querySelector('input').value.toLowerCase().trim()
+        let infosCid = document.querySelector('input').value.toLowerCase()
         let apichamada = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${infosCid},BR&limit=5&appid=ef17f7ce5ce0b6fb1684d90f66417048`)
     
         if(!apichamada.ok){
@@ -38,7 +38,7 @@ btn.addEventListener('click', async () => {
         if(!apicidade.ok){
             throw new Error('não achamos a cidade ou não conseguimos resposta do servidor')
         }
-        document.querySelector('#infos').style.display ='block'
+        document.querySelector('#infos').style.display ='flex'
         let dados = await apicidade.json()
        
         let cidade = document.querySelector('#cidade')
